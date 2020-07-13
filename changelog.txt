@@ -1,0 +1,6 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.3.60
+Date: 7/12/2020
+  Additions:
+    - Meme magazine ammo. This is what activates the effects and sounds
+    - Sniper Rifle. Long range high damage weapon. Please no-scope responsibly.
