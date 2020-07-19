@@ -39,7 +39,7 @@ end)
 
 script.on_event(defines.events.on_entity_died, -- .entity=entity .cause=entity .loot=inventory .force=force .damage_type=damageprototype
 function(event)
-if (event.damage_type.name == "ProAsHeck") then
+if (event.damage_type and event.damage_type.name == "ProAsHeck") then
 	event.entity.surface.play_sound
 		{
 			path = "backtrack",
@@ -91,7 +91,7 @@ end)
 
 script.on_event(defines.events.on_entity_damaged,
 function(event)
-if (event.cause and event.damage_type.name == "ProAsHeck") then
+if (event.cause and event.damage_type and event.damage_type.name == "ProAsHeck") then
 	if (global.EntityList[event.cause.unit_number] == nil) then
 		global.EntityList[event.cause.unit_number] = {}
 		global.EntityList[event.cause.unit_number].LastHit = 0
