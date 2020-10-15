@@ -1,9 +1,9 @@
 {
     "name": "MLG_FactOreo",
-    "version": "0.4.20",
+    "version": "0.6.9",
     "title": "MLG Factorio",
     "author": "Kiplacon",
-    "factorio_version": "0.18",
-    "dependencies": ["base >= 0.18"],
+    "factorio_version": "1.0",
+    "dependencies": ["base >= 1.0"],
     "description": "Adds a new 'special' type of bullet magazine, and a sniper rifle (scope included but not encouraged [you scrub]). Rack up a high kill streak and experience 2014 euphoria in what might actually be the worst Factorio mod to ever see the light of day.\n\nSong clips used:\n* Bangarang - Skrillex\n* Come and Get It - Krewella\n* I Keep Holding On (My Hope Will Never Die) - I See Monstas\n* Dead Link - Barely Alive\n* Get Blazed - Desembra"
 }

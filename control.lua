@@ -43,39 +43,44 @@ if (event.damage_type and event.damage_type.name == "ProAsHeck") then
 	event.entity.surface.play_sound
 		{
 			path = "backtrack",
-			position = event.cause.position
+			position = event.cause.position,
+			volume_modifier = settings.global["S1ckw0bS"].value
 		}
 	event.entity.surface.play_sound
 		{
 			path = "wombocombo",
-			position = event.cause.position
+			position = event.cause.position,
+			volume_modifier = settings.global["S1ckw0bS"].value
 		}
 	event.entity.surface.play_sound
 		{
 			path = "ooooo",
-			position = event.cause.position
+			position = event.cause.position,
+			volume_modifier = settings.global["S1ckw0bS"].value
 		}
-	if (global.EntityList[event.cause.unit_number].streak < 11) then
+	if (global.EntityList[event.cause.unit_number].streak < settings.global["HypeMax"].value) then
 		global.EntityList[event.cause.unit_number].streak = global.EntityList[event.cause.unit_number].streak+1
 	end
 	
-	if (math.random(1,2) == 1) then
+	if (math.random(1,settings.global["KillCam"].value) == 1) then
 		memeID = math.random(1,9)
 		rendering.draw_animation
 		{
 			animation = "rekt"..memeID,
 			target = event.entity.position,
 			surface = event.entity.surface.name,
-			time_to_live = 60
+			time_to_live = settings.global["FXTime"].value,
+			x_scale = settings.global["FXSize"].value,
+			y_scale = settings.global["FXSize"].value
 		}
 	end
 
-	if (math.random(1,3) == 3) then
+	if (math.random(1,settings.global["KillCam"].value) == 1) then
 		memeID = math.random(1,11)
 		if (memeID == 3 or memeID == 9) then
 			offset = {0,-1}
 		else
-			offset = {math.random(-3,3), math.random(-3,3)}
+			offset = {math.random(-settings.global["FXSpread"].value,settings.global["FXSpread"].value), math.random(-settings.global["FXSpread"].value,settings.global["FXSpread"].value)}
 		end
 		rendering.draw_animation
 		{
@@ -83,7 +88,9 @@ if (event.damage_type and event.damage_type.name == "ProAsHeck") then
 			target = event.cause,
 			target_offset = offset,
 			surface = event.cause.surface.name,
-			time_to_live = 100
+			time_to_live = settings.global["FXTime"].value,
+			x_scale = settings.global["FXSize"].value,
+			y_scale = settings.global["FXSize"].value
 		}
 	end
 end
@@ -101,7 +108,14 @@ if (event.cause and event.damage_type and event.damage_type.name == "ProAsHeck")
 	event.entity.surface.play_sound
 		{
 			path = "backtrack",
-			position = event.cause.position
+			position = event.cause.position,
+			volume_modifier = settings.global["S1ckw0bS"].value
+		}
+	event.entity.surface.play_sound
+		{
+			path = "hitmarkerFX",
+			position = event.cause.position,
+			volume_modifier = settings.global["S1ckw0bS"].value
 		}
 		
 	if (game.tick-global.EntityList[event.cause.unit_number].LastHit > 120) then	
@@ -118,6 +132,41 @@ if (event.cause and event.damage_type and event.damage_type.name == "ProAsHeck")
 			}
 		global.EntityList[event.cause.unit_number].LastHit = game.tick
 	end
+	
+	
+	if (math.random(1,settings.global["Hitmark"].value) == 1) then
+
+		memeID = math.random(1,9)
+		rendering.draw_animation
+		{
+			animation = "rekt"..memeID,
+			target = event.entity.position,
+			surface = event.entity.surface.name,
+			time_to_live = settings.global["FXTime"].value,
+			x_scale = settings.global["FXSize"].value,
+			y_scale = settings.global["FXSize"].value
+		}
+
+		memeID = math.random(1,11)
+		if (memeID == 3 or memeID == 9) then
+			offset = {0,-1}
+		else
+			offset = {math.random(-settings.global["FXSpread"].value,settings.global["FXSpread"].value), math.random(-settings.global["FXSpread"].value,settings.global["FXSpread"].value)}
+		end
+		rendering.draw_animation
+		{
+			animation = "pog"..memeID,
+			target = event.cause,
+			target_offset = offset,
+			surface = event.cause.surface.name,
+			time_to_live = settings.global["FXTime"].value,
+			x_scale = settings.global["FXSize"].value,
+			y_scale = settings.global["FXSize"].value
+		}
+
+	end
+	
+	
 end	
 end)
 

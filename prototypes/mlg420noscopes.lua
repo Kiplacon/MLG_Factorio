@@ -84,22 +84,6 @@ data:extend({
 				{
 				  type = "create-explosion",
 				  entity_name = "explosion-gunshot"
-				},
-				{
-				  type = "play-sound", --------------- play hitmark sound
-				  sound = 
-				  	{
-						type = "sound",
-						name = "hitmarkerFX",
-						filename = "__MLG_FactOreo__/sickw0bs/hitmarker.ogg",
-						audible_distance_modifier = 0.5,
-						volume = 0.42,
-						aggregation =
-							{
-								max_count = 69,
-								remove = false
-							}
-					}
 				}
 			  },
 			  target_effects = --------------- create hitmark effect
@@ -158,6 +142,18 @@ data:extend({
 	smoke = "smoke-fast",
 	smoke_count = 1,
 	smoke_slow_down_factor = 1
+},
+{
+	type = "sound",
+	name = "hitmarkerFX",
+	filename = "__MLG_FactOreo__/sickw0bs/hitmarker.ogg",
+	audible_distance_modifier = 0.5,
+	volume = 0.42,
+	aggregation =
+		{
+			max_count = 69,
+			remove = false
+		}
 },
 
 { ---------------------------- sound bites -----------
