@@ -2,7 +2,7 @@ data:extend({
 {
 	type = "double-setting",
 	name = "S1ckw0bS",
-	setting_type = "runtime-global",
+	setting_type = "startup",
 	default_value = 1,
 	minimum_value = 0,
 	maximum_value = 2,
