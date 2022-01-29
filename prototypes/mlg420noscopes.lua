@@ -40,7 +40,7 @@ data:extend({
 	type = "sound",
 	name = "hitmarkerFX",
 	filename = "__MLG_FactOreo__/sickw0bs/hitmarker.ogg",
-	audible_distance_modifier = 0.5,
+	--audible_distance_modifier = 0.5,
 	volume = 0.42*AllMultiplier*settings.startup["S1ckw0bS"].value,
 	aggregation =
 		{
@@ -59,7 +59,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/killcam/AIRHORN.ogg",
 			volume = MEME_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -82,7 +82,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/killcam/OHBABYATRIPLE.ogg",
 			volume = MEME_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -105,7 +105,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/killcam/WHATCHASAY.ogg",
 			volume = MEME_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -128,7 +128,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/killcam/SMOKEWEEDEVERYDAY.ogg",
 			volume = MEME_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -151,7 +151,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/killcam/HAPPYFEET.ogg",
 			volume = MEME_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -174,7 +174,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/killcam/WOMBOCOMBO.ogg",
 			volume = MEME_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -197,7 +197,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/killcam/CANTSEEME.ogg",
 			volume = MEME_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -220,7 +220,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/killcam/PUNCH.ogg",
 			volume = MEME_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -243,7 +243,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/killcam/SADBELLS.ogg",
 			volume = MEME_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -266,7 +266,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/killcam/EXPLOSION1.ogg",
 			volume = MEME_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -289,7 +289,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/killcam/DAMNSON.ogg",
 			volume = MEME_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -316,7 +316,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/ooooo/1.ogg",
 			volume = HYPE_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -339,7 +339,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/ooooo/2.ogg",
 			volume = HYPE_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -362,7 +362,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/ooooo/3.ogg",
 			volume = HYPE_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -385,7 +385,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/ooooo/4.ogg",
 			volume = HYPE_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -408,7 +408,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/ooooo/5.ogg",
 			volume = HYPE_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -431,7 +431,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/ooooo/6.ogg",
 			volume = HYPE_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -454,7 +454,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/ooooo/7.ogg",
 			volume = HYPE_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -479,7 +479,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/yoskrilldropithard/BANGARANG.ogg",
 			volume = BGM_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -502,7 +502,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/yoskrilldropithard/BARELYALIVE.ogg",
 			volume = BGM_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -525,7 +525,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/yoskrilldropithard/COMEANDGETIT.ogg",
 			volume = BGM_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -548,7 +548,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/yoskrilldropithard/COMEANDGETIT2.ogg",
 			volume = BGM_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -571,7 +571,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/yoskrilldropithard/GETBLAZED.ogg",
 			volume = BGM_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{
@@ -594,7 +594,7 @@ data:extend({
 		{
 			filename = "__MLG_FactOreo__/sickw0bs/yoskrilldropithard/MYHOPEWILLNEVERDIE.ogg",
 			volume = BGM_Base*AllMultiplier*settings.startup["S1ckw0bS"].value,
-			audible_distance_modifier = 0.6,
+			--audible_distance_modifier = 0.6,
 			max_sounds_per_type = 1,
 			aggregation =
 				{

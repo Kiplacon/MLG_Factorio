@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 69.420.101
+Date: 1/28/2022
+  Additions:
+    - Kill Streak Counter, the higher the kill streak, the bigger the rainbow aura grows and the more memes spawn per kill.
+    - The ability to press F to pay respects on a player corpse.
+    - Meme Magazine tier 2. Just deals more damage.
+  Changes:
+    - Changed sounds form playing at a location to playing with a sticker that gets applied to whatever is dealing meme damage. Apparently something changed with how Factoiro does sounds cause now sounds stay where they are when played.
+    - Glow aura now grows infinitely
+    - Changed some settings, volume is now a startup setting because stickers just work like that
+---------------------------------------------------------------------------------------------------
 Version: 0.6.969
 Date: 12/5/2020
   Changes:

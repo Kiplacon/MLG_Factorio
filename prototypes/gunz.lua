@@ -109,7 +109,6 @@ data:extend({
 	order = "a[basic-clips]-a[firearm-magazine]",
 	stack_size = 200
 },
-
 { --------- ammo recipie ----------
 	type = "recipe",
 	name = "thegoods",
@@ -122,6 +121,66 @@ data:extend({
 		},
 	result = "headshot",
 	result_count = 2
+},
+
+{ --------- ammo 2 ------------
+	type = "ammo",
+	name = "headshot2",
+	icon = "__MLG_FactOreo__/graphics/smokeweedeveryday/MemeMagazine.png",
+	icon_size = 64, icon_mipmaps = 4,
+	ammo_type =
+	{
+	  category = "bullet",
+	  action =
+	  {
+		{
+		  type = "direct",
+		  action_delivery =
+		  {
+			{
+			  type = "instant",
+			  source_effects =
+			  {
+				{
+				  type = "create-explosion",
+				  entity_name = "explosion-gunshot"
+				}
+			  },
+			  target_effects = --------------- create hitmark effect
+			  {
+				{
+				  type = "create-entity",
+				  entity_name = "hitmarker",
+				  offsets = {{0, 1}},
+				  offset_deviation = {{-1, -1}, {1, 1}} --{{-0.5, -0.5}, {0.5, 0.5}}
+				},
+				{
+				  type = "damage",
+				  damage = { amount = 13.37 , type = "ProAsHeck"}
+				}
+			  }
+			}
+		  }
+		}
+	  }
+	},
+	magazine_size = 10,
+	subgroup = "ammo",
+	order = "a[basic-clips]-b[firearm-magazine]",
+	stack_size = 200
+},
+{ --------- ammo 2 recipie ----------
+	type = "recipe",
+	name = "thegoods2",
+	enabled = false,
+	energy_required = 4,
+	ingredients =
+		{
+			{"headshot", 1},
+			{"steel-plate", 3},
+			{"explosives", 3},
+		},
+	result = "headshot2"
 },
 
 { --------- hitmark effect the meme bullets use------------
@@ -147,3 +206,4 @@ data:extend({
 })
 table.insert(data.raw["technology"]["military"].effects,{type="unlock-recipe",recipe="awwman"})
 table.insert(data.raw["technology"]["military"].effects,{type="unlock-recipe",recipe="thegoods"})
+table.insert(data.raw["technology"]["military"].effects,{type="unlock-recipe",recipe="thegoods2"})

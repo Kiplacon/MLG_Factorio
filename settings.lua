@@ -5,16 +5,15 @@ data:extend({
 	setting_type = "startup",
 	default_value = 1,
 	minimum_value = 0,
-	maximum_value = 2,
 	order = "a"
 },
 {
 	type = "int-setting",
-	name = "HypeMax",
+	name = "RIP_Leviathan",
 	setting_type = "runtime-global",
-	default_value = 11,
+	default_value = 1,
 	minimum_value = 1,
-	order = "b"
+	order = "aa"
 },
 {
 	type = "int-setting",
@@ -36,19 +35,19 @@ data:extend({
 },
 {
 	type = "double-setting",
-	name = "FXSize",
+	name = "FXSize_",
 	setting_type = "runtime-global",
-	default_value = 1,
-	minimum_value = 0,
-	order = "f"
+	default_value = 2,
+	minimum_value = 1,
+	order = "ab"
 },
 {
 	type = "double-setting",
-	name = "FXSpread",
+	name = "SaltyRunback",
 	setting_type = "runtime-global",
-	default_value = 3,
-	minimum_value = 0,
-	order = "g"
+	default_value = 10,
+	minimum_value = 1,
+	order = "ac"
 },
 {
 	type = "int-setting",
