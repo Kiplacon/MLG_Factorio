@@ -132,7 +132,7 @@ end)
 script.on_nth_tick(2,
 function(event)
 	for number, stuff in pairs(global.EntityList) do
-		if (stuff.entity.valid) then
+		if (stuff.entity.valid and rendering.is_valid(stuff.StreakTimer)) then
 			if (rendering.get_visible(stuff.StreakTimer) == true) then
 				rendering.set_to(stuff.StreakTimer, rendering.get_to(stuff.StreakTimer).entity, {rendering.get_to(stuff.StreakTimer).entity_offset[1]-0.02, 0.75})
 			end
