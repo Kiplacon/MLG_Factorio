@@ -1,6 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 69.420.3600
+Date: 3/9/2023
+  Bugfixes:
+    - Fixed crash that would happen when a turret that used MLG ammo was destroyed, then rebuilt, then used MLG ammo again. Apparently in that scenario the turret keeps the same behind-the-scenes unit_number which messed my code up.
+    - Fixed that sounds were playing out of sync with when they started. At some point Wube added match_progress_to_activity to stickers.
+---------------------------------------------------------------------------------------------------
 Version: 69.420.1337
-Date: 4/25/2020
+Date: 4/25/2022
   Changes:
     - Fixed crash when moving between surfaces, like Factorissimo buildings. Fix by tzwaan.
 ---------------------------------------------------------------------------------------------------

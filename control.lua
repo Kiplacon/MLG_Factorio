@@ -430,8 +430,10 @@ script.on_event(defines.events.on_entity_destroyed,
 function(event)
 	if (global.dummies[event.registration_number]) then
 		global.dummies[event.registration_number].destroy()
+		global.dummies[event.registration_number] = nil
 	elseif (global.dummies[event.unit_number]) then
 		global.dummies[event.unit_number].destroy()
+		global.dummies[event.unit_number] = nil
 	end
 end
 )

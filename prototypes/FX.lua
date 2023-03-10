@@ -113,6 +113,25 @@ data:extend({
 	animation_speed = 0.25,
 	scale = 0.2
 },
+{
+	type = "animation",
+	name = "pog12",
+	filename = "__MLG_FactOreo__/graphics/smokeweedeveryday/FX/sus.png",
+	size = 64,
+	frame_count = 6,
+	line_length = 3,
+	animation_speed = 0.5
+},
+{
+	type = "animation",
+	name = "pog12",
+	filename = "__MLG_FactOreo__/graphics/smokeweedeveryday/FX/tobey.png",
+	size = {150,160},
+	frame_count = 180,
+	line_length = 5,
+	animation_speed = 0.5,
+	scale = 0.5
+},
 
 
 
