@@ -52,10 +52,12 @@ data:extend({
 	energy_required = 0.5,
 	ingredients =
 		{
-			{"iron-plate", 69},
-			{"copper-plate", 69}
+			{type="item", name="iron-plate", amount=69},
+			{type="item", name="copper-plate", amount=69}
 		},
-	result = "creeper"
+	results = {
+		{type="item", name="creeper", amount=1}
+	}
 },
 
 { ---- damage type -----
@@ -67,10 +69,10 @@ data:extend({
 	type = "ammo",
 	name = "headshot",
 	icon = "__MLG_FactOreo__/graphics/smokeweedeveryday/MemeMagazine.png",
-	icon_size = 64, icon_mipmaps = 4,
+	icon_size = 64,
+	ammo_category = "bullet",
 	ammo_type =
 	{
-	  category = "bullet",
 	  action =
 	  {
 		{
@@ -116,21 +118,23 @@ data:extend({
 	energy_required = 2,
 	ingredients =
 		{
-			{"iron-plate", 6},
-			{"copper-plate", 9}
+			{type="item", name="iron-plate", amount=6},
+			{type="item", name="copper-plate", amount=9}
 		},
-	result = "headshot",
-	result_count = 2
+	results =
+		{
+			{type="item", name="headshot", amount=3}
+		}
 },
 
 { --------- ammo 2 ------------
 	type = "ammo",
 	name = "headshot2",
 	icon = "__MLG_FactOreo__/graphics/smokeweedeveryday/MemeMagazine.png",
-	icon_size = 64, icon_mipmaps = 4,
+	icon_size = 64,
+	ammo_category = "bullet",
 	ammo_type =
 	{
-	  category = "bullet",
 	  action =
 	  {
 		{
@@ -176,11 +180,14 @@ data:extend({
 	energy_required = 4,
 	ingredients =
 		{
-			{"headshot", 1},
-			{"steel-plate", 3},
-			{"explosives", 3},
+			{type="item", name="headshot", amount=1},
+			{type="item", name="steel-plate", amount=3},
+			{type="item", name="explosives", amount=3}
 		},
-	result = "headshot2"
+	results = 
+		{
+			{type="item", name="headshot2", amount=2}
+		}
 },
 
 { --------- hitmark effect the meme bullets use------------

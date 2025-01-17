@@ -1,9 +1,9 @@
 script.on_init( -- new saves
 function()
-	global.EntityList = {}
-	global.stickers = {}
-	global.dummies = {}
-	global.hover = {}
+	storage.EntityList = {}
+	storage.stickers = {}
+	storage.dummies = {}
+	storage.hover = {}
 	--- count rekt GFXs
 	local KillGFXScan = true
 	local count = 1
@@ -21,13 +21,13 @@ function()
 		) then
 			count = count+1
 		else
-			global.RektGFXCount = count-1
+			storage.RektGFXCount = count-1
 			KillGFXScan = false
 		end
 	end
 	--- count montage GFXs
 	local EuphoriaGFXScan = true
-	local count = 1
+	count = 1
 	while (EuphoriaGFXScan == true) do
 		if (pcall(
 			function()
@@ -42,43 +42,43 @@ function()
 		) then
 			count = count+1
 		else
-			global.PogGFXCount = count-1
+			storage.PogGFXCount = count-1
 			EuphoriaGFXScan = false
 		end
 	end
 	--- count various stickers
-	global.BGMCount = game.recipe_prototypes["MLG_SickW0bs"].emissions_multiplier
-	global.HYPECount = game.recipe_prototypes["MLG_Euphoria"].emissions_multiplier
-	global.MEMECount = game.recipe_prototypes["MLG_Maymays"].emissions_multiplier
+	storage.BGMCount = prototypes.recipe["MLG_SickW0bs"].emissions_multiplier
+	storage.HYPECount = prototypes.recipe["MLG_Euphoria"].emissions_multiplier
+	storage.MEMECount = prototypes.recipe["MLG_Maymays"].emissions_multiplier
 end)
 
 script.on_configuration_changed( -- existing saves/mod update
 function()
-	if (global.EntityList == nil) then
-		global.EntityList = {}
+	if (storage.EntityList == nil) then
+		storage.EntityList = {}
 	end
-	if (global.stickers == nil) then
-		global.stickers = {}
+	if (storage.stickers == nil) then
+		storage.stickers = {}
 	end
-	if (global.dummies == nil) then
-		global.dummies = {}
+	if (storage.dummies == nil) then
+		storage.dummies = {}
 	end
-	if (global.hover == nil) then
-		global.hover = {}
+	if (storage.hover == nil) then
+		storage.hover = {}
 	end
 	for _, force in pairs(game.forces) do
-	  force.reset_recipes()
-	  force.reset_technologies()
+		force.reset_recipes()
+		force.reset_technologies()
 
-	  -- create tech/recipe table once
-	  local techs = force.technologies
-	  local recipes = force.recipes
+		-- create tech/recipe table once
+		local techs = force.technologies
+		local recipes = force.recipes
 
-	  if techs["military"].researched then
-		recipes["awwman"].enabled = true
-		recipes["thegoods"].enabled = true
-		recipes["thegoods2"].enabled = true
-	  end
+		if techs["military"].researched then
+			recipes["awwman"].enabled = true
+			recipes["thegoods"].enabled = true
+			recipes["thegoods2"].enabled = true
+		end
 	end
 	--- count rekt GFXs
 	local KillGFXScan = true
@@ -97,13 +97,13 @@ function()
 		) then
 			count = count+1
 		else
-			global.RektGFXCount = count-1
+			storage.RektGFXCount = count-1
 			KillGFXScan = false
 		end
 	end
 	--- count montage GFXs
 	local EuphoriaGFXScan = true
-	local count = 1
+	count = 1
 	while (EuphoriaGFXScan == true) do
 		if (pcall(
 			function()
@@ -118,35 +118,36 @@ function()
 		) then
 			count = count+1
 		else
-			global.PogGFXCount = count-1
+			storage.PogGFXCount = count-1
 			EuphoriaGFXScan = false
 		end
 	end
 	--- count various stickers
-	global.BGMCount = game.recipe_prototypes["MLG_SickW0bs"].emissions_multiplier
-	global.HYPECount = game.recipe_prototypes["MLG_Euphoria"].emissions_multiplier
-	global.MEMECount = game.recipe_prototypes["MLG_Maymays"].emissions_multiplier
+	storage.BGMCount = prototypes.recipe["MLG_SickW0bs"].emissions_multiplier
+	storage.HYPECount = prototypes.recipe["MLG_Euphoria"].emissions_multiplier
+	storage.MEMECount = prototypes.recipe["MLG_Maymays"].emissions_multiplier
 end)
 
 
 script.on_nth_tick(2,
 function(event)
-	for number, stuff in pairs(global.EntityList) do
-		if (stuff.entity.valid and rendering.is_valid(stuff.StreakTimer)) then
-			if (rendering.get_visible(stuff.StreakTimer) == true) then
-				rendering.set_to(stuff.StreakTimer, rendering.get_to(stuff.StreakTimer).entity, {rendering.get_to(stuff.StreakTimer).entity_offset[1]-0.02, 0.75})
+	for number, stuff in pairs(storage.EntityList) do
+		if (stuff.entity.valid and stuff.StreakTimer.valid) then
+			if (stuff.StreakTimer.visible == true) then
+				--rendering.set_to(stuff.StreakTimer, rendering.get_to(stuff.StreakTimer).entity, {rendering.get_to(stuff.StreakTimer).entity_offset[1]-0.02, 0.75})
+				stuff.StreakTimer.to.offset = {stuff.StreakTimer.to.offset[1]-0.02, 0.75}
 			end
-			if (global.EntityList[number].LastKill and game.tick > global.EntityList[number].LastKill + 200) then
-				global.EntityList[number].streak = 0
-				rendering.set_visible(stuff.count, false)
-				rendering.set_visible(stuff.glow, false)
-				rendering.set_x_scale(stuff.glow, 1)
-				rendering.set_y_scale(stuff.glow, 1)
-				rendering.set_visible(stuff.StreakTimerBG, false)
-				rendering.set_visible(stuff.StreakTimer, false)
+			if (storage.EntityList[number].LastKill and game.tick > storage.EntityList[number].LastKill + 200) then
+				storage.EntityList[number].streak = 0
+				stuff.count.visible = false
+				stuff.glow.visible = false
+				stuff.glow.x_scale = 1
+				stuff.glow.y_scale = 1
+				stuff.StreakTimerBG.visible = false
+				stuff.StreakTimer.visible = false
 			end
 		else
-			global.EntityList[number] = nil
+			storage.EntityList[number] = nil
 		end
 	end
 end)
@@ -159,24 +160,25 @@ function(event)
 		if (event.cause.type == "character" or event.cause.type == "unit" or event.cause.type == "car") then
 			StickerTarget = event.cause
 		else
-			if (global.dummies[event.cause.unit_number] == nil) then
-				global.dummies[event.cause.unit_number] = event.cause.surface.create_entity
+			-- only characters, units, and cars can have stickers
+			if (storage.dummies[event.cause.unit_number] == nil) then
+				storage.dummies[event.cause.unit_number] = event.cause.surface.create_entity
 				{
 					name = "CHEEKYSCRUB",
 					position = event.cause.position
 				}
-				global.dummies[event.cause.unit_number].destructible = false
-				script.register_on_entity_destroyed(event.cause)
+				storage.dummies[event.cause.unit_number].destructible = false
+				script.register_on_object_destroyed(event.cause)
 			end
-			StickerTarget = global.dummies[event.cause.unit_number]
+			StickerTarget = storage.dummies[event.cause.unit_number]
 		end
 		----------- applying sound stickers
-		if (global.stickers[StickerTarget.unit_number] == nil) then
-			global.stickers[StickerTarget.unit_number] = {BMG = nil, HYPE=nil, MEME1=nil, MEME2=nil, MEME3=nil}
+		if (storage.stickers[StickerTarget.unit_number] == nil) then
+			storage.stickers[StickerTarget.unit_number] = {BMG = nil, HYPE=nil, MEME1=nil, MEME2=nil, MEME3=nil}
 		end
-		local stickers = global.stickers[StickerTarget.unit_number]
+		local stickers = storage.stickers[StickerTarget.unit_number]
 		if (stickers.BGM == nil or stickers.BGM.valid == false or stickers.BGM.time_to_live < 20) then
-			local track = math.random(1,global.BGMCount)
+			local track = math.random(1,storage.BGMCount)
 			stickers.BGM = StickerTarget.surface.create_entity
 			{
 				name="BGM"..track,
@@ -185,7 +187,7 @@ function(event)
 			}
 		end
 		if (stickers.HYPE == nil or stickers.HYPE.valid == false or stickers.HYPE.time_to_live < 20) then
-			local track = math.random(1,global.HYPECount)
+			local track = math.random(1,storage.HYPECount)
 			stickers.HYPE = StickerTarget.surface.create_entity
 			{
 				name="HYPE"..track,
@@ -194,7 +196,7 @@ function(event)
 			}
 		end
 		if (stickers.MEME1 == nil or stickers.MEME1.valid == false) then
-			local track = math.random(1,global.MEMECount)
+			local track = math.random(1,storage.MEMECount)
 			stickers.MEME1 = StickerTarget.surface.create_entity
 			{
 				name="MEME"..track,
@@ -202,7 +204,7 @@ function(event)
 				position={420,69}
 			}
 		elseif (stickers.MEME2 == nil or stickers.MEME2.valid == false) then
-			local track = math.random(1,global.MEMECount)
+			local track = math.random(1,storage.MEMECount)
 			stickers.MEME2 = StickerTarget.surface.create_entity
 			{
 				name="MEME"..track,
@@ -210,7 +212,7 @@ function(event)
 				position={420,69}
 			}
 		elseif (stickers.MEME3 == nil or stickers.MEME3.valid == false) then
-			local track = math.random(1,global.MEMECount)
+			local track = math.random(1,storage.MEMECount)
 			stickers.MEME3 = StickerTarget.surface.create_entity
 			{
 				name="MEME"..track,
@@ -220,26 +222,26 @@ function(event)
 		end
 
 		--- kill streak +
-		global.EntityList[event.cause.unit_number].streak = global.EntityList[event.cause.unit_number].streak+1
-		MemeStacks = global.EntityList[event.cause.unit_number].streak/settings.global["RIP_Leviathan"].value
-		global.EntityList[event.cause.unit_number].LastKill = game.tick
-		if (global.EntityList[event.cause.unit_number].streak > 1) then
-			rendering.set_visible(global.EntityList[event.cause.unit_number].count, true)
-			rendering.set_visible(global.EntityList[event.cause.unit_number].StreakTimer, true)
-			rendering.set_to(global.EntityList[event.cause.unit_number].StreakTimer, rendering.get_to(global.EntityList[event.cause.unit_number].StreakTimer).entity, {1, 0.75})
-			rendering.set_visible(global.EntityList[event.cause.unit_number].StreakTimerBG, true)
+		storage.EntityList[event.cause.unit_number].streak = storage.EntityList[event.cause.unit_number].streak+1
+		MemeStacks = storage.EntityList[event.cause.unit_number].streak/settings.global["RIP_Leviathan"].value
+		storage.EntityList[event.cause.unit_number].LastKill = game.tick
+		if (storage.EntityList[event.cause.unit_number].streak > 1) then
+			storage.EntityList[event.cause.unit_number].count.visible =  true
+			storage.EntityList[event.cause.unit_number].StreakTimer.visible =  true
+			storage.EntityList[event.cause.unit_number].StreakTimer.to.offset = {1, 0.75}
+			storage.EntityList[event.cause.unit_number].StreakTimerBG.visible =  true
 		end
 		local wow = "!"
-		-- for ayy = 1, math.floor(global.EntityList[event.cause.unit_number].streak/10) do
+		-- for ayy = 1, math.floor(storage.EntityList[event.cause.unit_number].streak/10) do
 		-- 	wow = wow.."!"
 		-- end
-		rendering.set_text(global.EntityList[event.cause.unit_number].count, {"labels.killstreak", global.EntityList[event.cause.unit_number].streak..wow})
-		rendering.set_visible(global.EntityList[event.cause.unit_number].glow, true)
-		rendering.set_x_scale(global.EntityList[event.cause.unit_number].glow, 1 + 0.5*MemeStacks)
-		rendering.set_y_scale(global.EntityList[event.cause.unit_number].glow, 1 + 0.5*MemeStacks)
+		storage.EntityList[event.cause.unit_number].count.text = {"labels.killstreak", storage.EntityList[event.cause.unit_number].streak..wow}
+		storage.EntityList[event.cause.unit_number].glow.visible = true
+		storage.EntityList[event.cause.unit_number].glow.x_scale = 1 + 0.5*MemeStacks
+		storage.EntityList[event.cause.unit_number].glow.y_scale = 1 + 0.5*MemeStacks
 
 		-- effect on thing killed
-		memeID = math.random(1,global.RektGFXCount)
+		local memeID = math.random(1,storage.RektGFXCount)
 		rendering.draw_animation
 		{
 			animation = "rekt"..memeID,
@@ -253,8 +255,8 @@ function(event)
 
 		-- effect on killer
 		for i = 1, 1 + math.floor(MemeStacks/settings.global["SaltyRunback"].value) do
-			if (math.random(1,settings.global["KillCam"].value) == 1) then
-				memeID = math.random(1,global.PogGFXCount)
+			if (math.random(1, settings.global["KillCam"].value) == 1) then
+				memeID = math.random(1,storage.PogGFXCount)
 				local turnt = math.random(-50,50)*0.01*(1/50)*MemeStacks
 				if (memeID == 3 or memeID == 9) then
 					offset = {0,-1}
@@ -266,8 +268,7 @@ function(event)
 				rendering.draw_animation
 				{
 					animation = "pog"..memeID,
-					target = event.cause,
-					target_offset = offset,
+					target = {entity=event.cause, offset=offset},
 					orientation = turnt,
 					surface = event.cause.surface.name,
 					time_to_live = settings.global["FXTime"].value * (1+(math.random(1,20)*0.1)),
@@ -285,32 +286,30 @@ script.on_event(defines.events.on_entity_damaged,
 function(event)
 	if (event.cause and event.damage_type and event.damage_type.name == "ProAsHeck") then
 		---- Glowup.png -------
-		if (global.EntityList[event.cause.unit_number] == nil) then
-			global.EntityList[event.cause.unit_number] = {}
-			global.EntityList[event.cause.unit_number].entity = event.cause
-			global.EntityList[event.cause.unit_number].streak = 0
-			global.EntityList[event.cause.unit_number].glow = rendering.draw_animation
+		if (storage.EntityList[event.cause.unit_number] == nil) then
+			storage.EntityList[event.cause.unit_number] = {}
+			storage.EntityList[event.cause.unit_number].entity = event.cause
+			storage.EntityList[event.cause.unit_number].streak = 0
+			storage.EntityList[event.cause.unit_number].glow = rendering.draw_animation
 				{
 					animation = "MLGglow",
-					target = event.cause,
-					target_offset = {0,-0.75},
+					target = {entity=event.cause, offset={0,-0.75}},
 					surface = event.entity.surface.name,
 					x_scale = 1,
 					y_scale = 1,
 					visible = false
 				}
-			global.EntityList[event.cause.unit_number].count = rendering.draw_text
+			storage.EntityList[event.cause.unit_number].count = rendering.draw_text
 				{
 					text = 0,
 					color = {1,1,1},
 					scale = 1.25,
 					target = event.cause,
-					target_offset = {0,0},
 					alignment="center",
 					surface = event.entity.surface.name,
 					visible = false
 				}
-				global.EntityList[event.cause.unit_number].StreakTimerBG = rendering.draw_line
+				storage.EntityList[event.cause.unit_number].StreakTimerBG = rendering.draw_line
 					{
 						color = {0.25,0.25,0.25,1},
 						width = 10,
@@ -321,7 +320,7 @@ function(event)
 						surface = event.entity.surface.name,
 						visible = false
 					}
-			global.EntityList[event.cause.unit_number].StreakTimer = rendering.draw_line
+			storage.EntityList[event.cause.unit_number].StreakTimer = rendering.draw_line
 				{
 					color = {0.8,0.8,0.5},
 					width = 6,
@@ -332,11 +331,11 @@ function(event)
 					surface = event.entity.surface.name,
 					visible = false
 				}
-			global.EntityList[event.cause.unit_number].LastKill = 0
+			storage.EntityList[event.cause.unit_number].LastKill = 0
 		end
-		if (rendering.get_visible(global.EntityList[event.cause.unit_number].glow) == false) then
-			rendering.set_visible(global.EntityList[event.cause.unit_number].glow, true)
-			global.EntityList[event.cause.unit_number].LastKill = game.tick
+		if (storage.EntityList[event.cause.unit_number].glow.visible == false) then
+			storage.EntityList[event.cause.unit_number].glow.visible = true
+			storage.EntityList[event.cause.unit_number].LastKill = game.tick
 		end
 
 		---- setup sound stickers ------
@@ -344,25 +343,25 @@ function(event)
 		if (event.cause.type == "character" or event.cause.type == "unit" or event.cause.type == "car") then
 			StickerTarget = event.cause
 		else
-			if (global.dummies[event.cause.unit_number] == nil) then
-				global.dummies[event.cause.unit_number] = event.cause.surface.create_entity
+			if (storage.dummies[event.cause.unit_number] == nil) then
+				storage.dummies[event.cause.unit_number] = event.cause.surface.create_entity
 				{
 					name = "CHEEKYSCRUB",
 					position = event.cause.position
 				}
-				global.dummies[event.cause.unit_number].destructible = false
-				global.dummies[event.cause.unit_number].active = false
-				script.register_on_entity_destroyed(event.cause)
+				storage.dummies[event.cause.unit_number].destructible = false
+				storage.dummies[event.cause.unit_number].active = false
+				script.register_on_object_destroyed(event.cause)
 			end
-			StickerTarget = global.dummies[event.cause.unit_number]
+			StickerTarget = storage.dummies[event.cause.unit_number]
 		end
 		----------- applying stickers
-		if (global.stickers[StickerTarget.unit_number] == nil) then
-			global.stickers[StickerTarget.unit_number] = {BMG = nil, HYPE=nil, MEME1=nil, MEME2=nil, MEME3=nil}
+		if (storage.stickers[StickerTarget.unit_number] == nil) then
+			storage.stickers[StickerTarget.unit_number] = {BMG = nil, HYPE=nil, MEME1=nil, MEME2=nil, MEME3=nil}
 		end
-		local stickers = global.stickers[StickerTarget.unit_number]
+		local stickers = storage.stickers[StickerTarget.unit_number]
 		if (stickers.BGM == nil or stickers.BGM.valid == false or stickers.BGM.time_to_live < 20) then
-			local track = math.random(1,global.BGMCount)
+			local track = math.random(1,storage.BGMCount)
 			stickers.BGM = StickerTarget.surface.create_entity
 			{
 				name="BGM"..track,
@@ -379,11 +378,11 @@ function(event)
 			}
 
 		----- Effects spawning ------
-		if (math.random(1,settings.global["Hitmark"].value) == 1) then
+		if (math.random(1, settings.global["Hitmark"].value) == 1) then
 			-- effect on thing killed
-			MemeStacks = global.EntityList[event.cause.unit_number].streak/settings.global["RIP_Leviathan"].value
-			if (math.random(1,settings.global["KillCam"].value) == 1) then
-				memeID = math.random(1,global.RektGFXCount)
+			MemeStacks = storage.EntityList[event.cause.unit_number].streak/settings.global["RIP_Leviathan"].value
+			if (math.random(1, settings.global["KillCam"].value) == 1) then
+				memeID = math.random(1,storage.RektGFXCount)
 				rendering.draw_animation
 				{
 					animation = "rekt"..memeID,
@@ -397,8 +396,8 @@ function(event)
 			end
 			-- effect on killer
 			for i = 1, 1 + math.floor(MemeStacks/settings.global["SaltyRunback"].value) do
-				if (math.random(1,settings.global["KillCam"].value) == 1) then
-					memeID = math.random(1,global.PogGFXCount)
+				if (math.random(1, settings.global["KillCam"].value) == 1) then
+					memeID = math.random(1,storage.PogGFXCount)
 					local turnt = math.random(-50,50)*0.01*(1/50)*MemeStacks
 					if (memeID == 3 or memeID == 9) then
 						offset = {0,-1}
@@ -410,8 +409,7 @@ function(event)
 					rendering.draw_animation
 					{
 						animation = "pog"..memeID,
-						target = event.cause,
-						target_offset = offset,
+						target = {entity=event.cause, offset=offset},
 						orientation = turnt,
 						surface = event.cause.surface.name,
 						time_to_live = settings.global["FXTime"].value * (1+(math.random(1,20)*0.1)),
@@ -426,14 +424,14 @@ function(event)
 	end
 end)
 
-script.on_event(defines.events.on_entity_destroyed,
+script.on_event(defines.events.on_object_destroyed,
 function(event)
-	if (global.dummies[event.registration_number]) then
-		global.dummies[event.registration_number].destroy()
-		global.dummies[event.registration_number] = nil
-	elseif (global.dummies[event.unit_number]) then
-		global.dummies[event.unit_number].destroy()
-		global.dummies[event.unit_number] = nil
+	if (storage.dummies[event.registration_number]) then
+		storage.dummies[event.registration_number].destroy()
+		storage.dummies[event.registration_number] = nil
+	--[[ elseif (storage.dummies[event.unit_number]) then
+		storage.dummies[event.unit_number].destroy()
+		storage.dummies[event.unit_number] = nil ]]
 	end
 end
 )
@@ -448,12 +446,11 @@ function(event)
 	local selected = player.selected
 	local LastSelected = event.last_entity
 	if (selected and selected.type == "character-corpse") then
-		global.hover[selected.position.x..","..selected.position.y..selected.surface.name] = rendering.draw_text
+		storage.hover[selected.position.x..","..selected.position.y..selected.surface.name] = rendering.draw_text
 		{
 			text = {"labels.F"},
 			surface = player.surface,
-			target = selected,
-			target_offset = {0,-1.6},
+			target = {entity=selected, offset={0,-1.6}},
 			color = {1,1,1},
 			alignment="center",
 			scale = 1.5
@@ -461,31 +458,31 @@ function(event)
 	elseif (selected == nil
 	and LastSelected
 	and LastSelected.type == "character-corpse"
-	and global.hover[LastSelected.position.x..","..LastSelected.position.y..LastSelected.surface.name]) then
-		rendering.destroy(global.hover[LastSelected.position.x..","..LastSelected.position.y..LastSelected.surface.name])
-		global.hover[LastSelected.position.x..","..LastSelected.position.y..LastSelected.surface.name] = nil
+	and storage.hover[LastSelected.position.x..","..LastSelected.position.y..LastSelected.surface.name]) then
+		rendering.destroy(storage.hover[LastSelected.position.x..","..LastSelected.position.y..LastSelected.surface.name])
+		storage.hover[LastSelected.position.x..","..LastSelected.position.y..LastSelected.surface.name] = nil
 	end
 end
 )
 
 -- On Interact
-script.on_event("xXx_P4yRe$p3c+S_xXx",
+script.on_event("PayRespects",
 function(event)
 	local player = game.players[event.player_index]
 	if (player.selected and player.selected.type == "character-corpse") then
 		local corpse = player.selected
-		local registration_number = script.register_on_entity_destroyed(corpse)
-		if (global.dummies[registration_number] == nil) then
-			global.dummies[registration_number] = corpse.surface.create_entity
+		local registration_number = script.register_on_object_destroyed(corpse)
+		if (storage.dummies[registration_number] == nil) then
+			storage.dummies[registration_number] = corpse.surface.create_entity
 			{
 				name = "CHEEKYSCRUB",
 				position = corpse.position
 			}
-			global.dummies[registration_number].destructible = false
-			global.dummies[registration_number].active = false
+			storage.dummies[registration_number].destructible = false
+			storage.dummies[registration_number].active = false
 
 		end
-		local StickerTarget = global.dummies[registration_number]
+		local StickerTarget = storage.dummies[registration_number]
 		StickerTarget.surface.create_entity
 		{
 			name="MEME9",
@@ -497,8 +494,7 @@ function(event)
 		{
 			text = {"RIP.RIP"..math.random(1,7)},
 			surface = player.surface,
-			target = player.character,
-			target_offset = {math.random(-10,10)*0.1, math.random(-20,0)*0.1},
+			target = {entity=player.character, offset={math.random(-10,10)*0.1, math.random(-20,0)*0.1}},
 			color = {1,1,1},
 			alignment="center",
 			time_to_live = 60*2.5

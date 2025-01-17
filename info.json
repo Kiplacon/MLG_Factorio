@@ -1,9 +1,9 @@
 {
     "name": "MLG_FactOreo",
-    "version": "69.420.3600",
+    "version": "69.420.6969",
     "title": "MLG Factorio",
     "author": "Kiplacon",
-    "factorio_version": "1.1",
-    "dependencies": ["base >= 1.0"],
-    "description": "Adds a new 'special' type of bullet magazine, and a sniper rifle (scope included but not encouraged [you scrub]). Rack up a high kill streak and experience 2014 euphoria in what might actually be the worst Factorio mod to ever see the light of day."
+    "factorio_version": "2.0",
+    "dependencies": ["base >= 2.0.0", "? space-age >= 1.0.0"],
+    "description": "😫Experience😫 2014 👌euphoria👌 and rack 🔝up☝ an 🔥EPIC💯 🔪kill streak💀 in 🤔what❔ might actually 🐝be🐝 the 👎worst👿 ⚙Factorio⚙ mod to ever 👀see👀 the 💡light🔦 of 🌞day🔆."
 }

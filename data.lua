@@ -4,7 +4,7 @@ require("prototypes.mlg420noscopes")
 data:extend({
   {
     type = "custom-input",
-    name = "xXx_P4yRe$p3c+S_xXx",
+    name = "PayRespects",
     key_sequence = "F"
 }
 })

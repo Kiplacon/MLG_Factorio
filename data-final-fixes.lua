@@ -11,11 +11,9 @@ while (BGMScan == true) do
 				enabled = false,
 				hidden = true,
 				emissions_multiplier = count-1,
-				ingredients =
-					{
-						{"infinity-chest", 360}
-					},
-				result = "infinity-chest"
+				results = {
+					{type="item", name="infinity-chest", amount=1}
+				}
 			}
 		)}
 		BGMScan = false
@@ -35,11 +33,9 @@ while (HYPEScan == true) do
 				enabled = false,
 				hidden = true,
 				emissions_multiplier = count-1,
-				ingredients =
-					{
-						{"infinity-chest", 360}
-					},
-				result = "infinity-chest"
+				results = {
+					{type="item", name="infinity-chest", amount=1}
+				}
 			}
 		)}
 		HYPEScan = false
@@ -59,11 +55,9 @@ while (MEMEScan == true) do
 				enabled = false,
 				hidden = true,
 				emissions_multiplier = count-1,
-				ingredients =
-					{
-						{"infinity-chest", 360}
-					},
-				result = "infinity-chest"
+				results = {
+					{type="item", name="infinity-chest", amount=1}
+				}
 			}
 		)}
 		MEMEScan = false

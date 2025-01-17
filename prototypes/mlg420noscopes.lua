@@ -22,6 +22,7 @@ data:extend({
 		range = 69,
 		cooldown = 420,
 		ammo_type = {category = "bullet"},
+		ammo_category = "bullet",
 		animation =
 			{
 				direction_count = 1,
@@ -31,7 +32,7 @@ data:extend({
 	},
 	movement_speed = 0,
 	distance_per_frame = 0,
-	pollution_to_join_attack = 0,
+	--pollution_to_join_attack = 0,
 	distraction_cooldown = 0,
 	vision_distance = 0
 },
