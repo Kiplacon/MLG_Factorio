@@ -132,6 +132,16 @@ data:extend({
 	animation_speed = 0.5,
 	scale = 0.5
 },
+{
+	type = "animation",
+	name = "pog13",
+	filename = "__MLG_FactOreo__/graphics/smokeweedeveryday/FX/datboi.png",
+	size = {64,80},
+	frame_count = 5,
+	line_length = 5,
+	animation_speed = 0.5,
+	scale = 0.5
+},
 
 
 

@@ -1,9 +1,12 @@
+if script.active_mods["gvv"] then require("__gvv__.gvv")() end
+
 script.on_init( -- new saves
 function()
 	storage.EntityList = {}
 	storage.stickers = {}
 	storage.dummies = {}
 	storage.hover = {}
+	storage.players = {}
 	--- count rekt GFXs
 	local KillGFXScan = true
 	local count = 1
@@ -65,6 +68,9 @@ function()
 	end
 	if (storage.hover == nil) then
 		storage.hover = {}
+	end
+	if (storage.players == nil) then
+		storage.players = {}
 	end
 	--- count rekt GFXs
 	local KillGFXScan = true
@@ -167,7 +173,7 @@ function(event)
 		end
 		local stickers = storage.stickers[StickerTargetDestroyNumber]
 		-- 1 music track at a time
-		if (stickers.BGM == nil or stickers.BGM.valid == false or stickers.BGM.time_to_live < 20) then
+		if (stickers.BGM == nil or stickers.BGM.valid == false or stickers.BGM.time_to_live < 30) then
 			local track = math.random(1,storage.BGMCount)
 			stickers.BGM = StickerTarget.surface.create_entity
 			{
@@ -177,7 +183,7 @@ function(event)
 			}
 		end
 		-- 1 hype track at a time
-		if (stickers.HYPE == nil or stickers.HYPE.valid == false or stickers.HYPE.time_to_live < 20) then
+		if (stickers.HYPE == nil or stickers.HYPE.valid == false or stickers.HYPE.time_to_live < 30) then
 			local track = math.random(1,storage.HYPECount)
 			stickers.HYPE = StickerTarget.surface.create_entity
 			{
@@ -223,6 +229,47 @@ function(event)
 			properties.StreakTimer.to = {entity=properties.StreakTimer.to.entity, offset={1, 0.75}}
 			properties.StreakTimerBG.visible =  true
 		end
+		if (properties.streak%50 == 0) then
+			if (event.cause.type == "character" and event.cause.player) then
+				event.cause.player.clear_cursor()
+				event.cause.player.cursor_stack.set_stack({name="TACTICLE_NUKE_INCOMING", count=1})
+				event.cause.character_build_distance_bonus = event.cause.character_build_distance_bonus + 420
+				if (storage.players[event.cause.player.index] == nil) then
+					storage.players[event.cause.player.index] = {}
+				end
+				storage.players[event.cause.player.index].NukeRangeBuff = true
+				rendering.draw_rectangle
+				{
+					color = {0,0,0,0.5},
+					left_top = {entity=event.cause, offset={-20, -10}},
+					right_bottom = {entity=event.cause, offset={20, -4}},
+					filled = true,
+					surface = event.cause.surface,
+					time_to_live = 60*5
+				}
+				rendering.draw_text
+				{
+					text = properties.streak.." KILL STREAK!",
+					surface = event.cause.surface,
+					target = {entity=event.cause, offset={0,-10.6}},
+					color = {1,1,1},
+					alignment="center",
+					scale = 7,
+					time_to_live = 60*5
+				}
+				rendering.draw_text
+				{
+					text = "Press LMB for TACTICLE NUKE!",
+					surface = event.cause.surface,
+					target = {entity=event.cause, offset={0,-7.6}},
+					color = {1,1,1},
+					alignment="center",
+					scale = 7,
+					time_to_live = 60*5
+				}
+			end
+		end
+
 		local wow = "!"
 		-- for ayy = 1, math.floor(properties.streak/10) do
 		-- 	wow = wow.."!"
@@ -241,21 +288,19 @@ function(event)
 			surface = event.entity.surface.name,
 			time_to_live = settings.global["FXTime"].value * (1+(math.random(1,20)*0.1)),
 			animation_offset = math.random(0,100),
-			x_scale = 1 + (settings.global["FXSize_"].value*0.01*MemeStacks),
-			y_scale = 1 + (settings.global["FXSize_"].value*0.01*MemeStacks)
+			x_scale = math.random(1, math.ceil(1 + (settings.global["FXSize_"].value*0.01*MemeStacks))),
+			y_scale = math.random(1, math.ceil(1 + (settings.global["FXSize_"].value*0.01*MemeStacks)))
 		}
 
 		-- effect on killer
 		for i = 1, 1 + math.floor(MemeStacks/settings.global["SaltyRunback"].value) do
 			if (math.random(1, settings.global["KillCam"].value) == 1) then
 				memeID = math.random(1,storage.PogGFXCount)
+				local SpreadRange = 3 + 0.3*MemeStacks
+				local offset = {math.random(-SpreadRange ,SpreadRange), math.random(-SpreadRange, SpreadRange)}
 				local turnt = math.random(-50,50)*0.01*(1/50)*MemeStacks
 				if (memeID == 3 or memeID == 9) then
-					offset = {0,-1}
 					turnt = math.random(-30,30)*0.001
-				else
-					local SpreadRange = 3 + 0.3*MemeStacks
-					offset = {math.random(-SpreadRange ,SpreadRange), math.random(-SpreadRange, SpreadRange)}
 				end
 				rendering.draw_animation
 				{
@@ -266,8 +311,8 @@ function(event)
 					time_to_live = settings.global["FXTime"].value * (1+(math.random(1,20)*0.1)),
 					animation_offset = math.random(0,100),
 					animation_speed = 1+((math.random(0,100)*0.1)^6/100000),
-					x_scale = 1 + (settings.global["FXSize_"].value*0.01*MemeStacks),
-					y_scale = 1 + (settings.global["FXSize_"].value*0.01*MemeStacks)
+					x_scale = math.ceil(1 + (settings.global["FXSize_"].value*0.01*MemeStacks)),
+					y_scale = math.ceil(1 + (settings.global["FXSize_"].value*0.01*MemeStacks))
 				}
 			end
 		end
@@ -352,7 +397,7 @@ function(event)
 			storage.stickers[StickerTargetDestroyNumber] = {BMG = nil, HYPE=nil, MEME1=nil, MEME2=nil, MEME3=nil}
 		end
 		local stickers = storage.stickers[StickerTargetDestroyNumber]
-		if (stickers.BGM == nil or stickers.BGM.valid == false or stickers.BGM.time_to_live < 20) then
+		if (stickers.BGM == nil or stickers.BGM.valid == false or stickers.BGM.time_to_live < 30) then
 			local track = math.random(1,storage.BGMCount)
 			stickers.BGM = StickerTarget.surface.create_entity
 			{
@@ -487,5 +532,185 @@ function(event)
 			alignment="center",
 			time_to_live = 60*2.5
 		}
+	end
+end)
+
+
+-- DEBUG JUKEBOX
+script.on_event("MIXTAPE",
+function(event)
+	local player = game.players[event.player_index]
+	if (player.gui.screen.MLG_RADIO) then
+		player.gui.screen.MLG_RADIO.destroy()
+	else
+		if (player.character) then
+			player.play_sound
+			{
+				path="VINEBOOM",
+				volume_modifier=1
+			}
+			local frame = player.gui.screen.add{type="frame", name="MLG_RADIO", direction="vertical", tags={ID=script.register_on_object_destroyed(player.character)}}
+			frame.force_auto_center()
+			add_titlebar(player.gui.screen.MLG_RADIO, "MLG DEBUG RADIO", "DEALWITHIT")
+			local layout = frame.add{type="table", name="layout", column_count=3}
+				--layout.style.font = "heading-1"
+				layout.add{type="label", caption="SONGS"}.style.font = "heading-1"
+				layout.add{type="label", caption=""}
+				layout.add{type="label", caption=""}
+				for i = 1, storage.BGMCount do
+					layout.add{type="button", caption="BGM"..i, tags={effect="PlayBGM", ID=i, TargetDestroyNumber=script.register_on_object_destroyed(player.character)}}
+				end
+				for i = 1, 3-storage.BGMCount%3 do
+					layout.add{type="label", caption=""}
+				end
+
+				layout.add{type="label", caption="FREAKOUTS"}.style.font = "heading-1"
+				layout.add{type="label", caption=""}
+				layout.add{type="label", caption=""}
+				for i = 1, storage.HYPECount do
+					layout.add{type="button", caption="HYPE"..i, tags={effect="PlayHYPE", ID=i, TargetDestroyNumber=script.register_on_object_destroyed(player.character)}}
+				end
+				for i = 1, 3-storage.HYPECount%3 do
+					layout.add{type="label", caption=""}
+				end
+
+				layout.add{type="label", caption="MEMES"}.style.font = "heading-1"
+				layout.add{type="label", caption=""}
+				layout.add{type="label", caption=""}
+				for i = 1, storage.MEMECount do
+					layout.add{type="button", caption="MEME"..i, tags={effect="PlayMEME", ID=i, TargetDestroyNumber=script.register_on_object_destroyed(player.character)}}
+				end
+			player.opened = frame
+		end
+	end
+
+end)
+
+script.on_event(defines.events.on_gui_click,
+-- element :: LuaGuiElement: The clicked element.
+-- player_index :: uint: The player who did the clicking.
+-- button :: defines.mouse_button_type: The mouse button used if any.
+-- alt :: boolean: If alt was pressed.
+-- control :: boolean: If control was pressed.
+-- shift :: boolean: If shift was pressed.
+function(event)
+	local player = game.players[event.player_index]
+	local TriggerEffect = event.element.tags.effect
+	if (player.character and (TriggerEffect == "PlayBGM" or TriggerEffect == "PlayHYPE" or TriggerEffect == "PlayMEME")) then
+		local StickerTargetDestroyNumber = script.register_on_object_destroyed(player.character)
+		if (storage.stickers[StickerTargetDestroyNumber] == nil) then
+			storage.stickers[StickerTargetDestroyNumber] = {}
+		end
+		local stickers = storage.stickers[StickerTargetDestroyNumber]
+		if (stickers.BGM) then
+			stickers.BGM.destroy()
+		end
+		if (TriggerEffect == "PlayBGM") then
+			stickers.BGM = player.character.surface.create_entity
+			{
+				name="BGM"..event.element.tags.ID,
+				target=player.character,
+				position={420,69}
+			}
+		elseif (TriggerEffect == "PlayHYPE") then
+			stickers.BGM = player.character.surface.create_entity
+			{
+				name="HYPE"..event.element.tags.ID,
+				target=player.character,
+				position={420,69}
+			}
+		elseif (TriggerEffect == "PlayMEME") then
+			stickers.BGM = player.character.surface.create_entity
+			{
+				name="MEME"..event.element.tags.ID,
+				target=player.character,
+				position={420,69}
+			}
+		end
+	end
+end)
+
+
+script.on_event(defines.events.on_gui_closed,
+function(event)
+	local player = game.players[event.player_index]
+	if (player.gui.screen.MLG_RADIO) then
+		player.gui.screen.MLG_RADIO.destroy()
+	end
+end)
+
+function add_titlebar(gui, caption, close_button_name)
+	local titlebar = gui.add{type = "flow"}
+	titlebar.drag_target = gui
+	titlebar.add{
+		type = "label",
+		style = "frame_title",
+		caption = caption,
+		ignored_by_interaction = true,
+	}
+	local filler = titlebar.add{
+		type = "empty-widget",
+		style = "draggable_space",
+		ignored_by_interaction = true,
+	}
+	filler.style.height = 24
+	filler.style.horizontally_stretchable = true
+	titlebar.add{
+		type = "sprite-button",
+		name = close_button_name,
+		style = "frame_action_button",
+		sprite = "utility/close",
+		hovered_sprite = "utility/close_black",
+		clicked_sprite = "utility/close_black",
+		tooltip = {"gui.close-instruction"},
+		tags = {RTEffect="RTCloseGUI"}
+	}
+end
+
+script.on_event(defines.events.on_built_entity, --| built by hand ----,
+function(event)
+	local entity = event.entity
+	local player = game.players[event.player_index]
+	if (entity.name == "TACTICLE_NUKE") then
+		rendering.draw_animation
+		{
+			animation = "TACTICLE_NUKE_INCOMING",
+			target = {entity.position.x+3, entity.position.y},
+			tint = {0.7, 0.7, 0.7, 0.7},
+			surface = entity.surface.name,
+			render_layer = "above-inserters",
+			time_to_live = 60*5.7,
+			animation_offset = ((375 - (game.tick%375)) * (175/375)) + 12,
+			x_scale = 4,
+			y_scale = 4
+		}
+		entity.surface.play_sound
+		{
+			path = "NUKE_INCOMING",
+			position = entity.position
+		}
+		player.play_sound
+		{
+			path = "NUKE_INCOMING",
+		}
+		entity.surface.create_entity
+		{
+			name="atomic-rocket",
+			position = {entity.position.x, entity.position.y-285},
+			target = entity.position
+		}
+		entity.destroy()
+	end
+end)
+
+script.on_event(defines.events.on_player_cursor_stack_changed,
+function(event)
+	local player = game.players[event.player_index]
+	if (player.character
+	and ((player.cursor_stack.valid_for_read and player.cursor_stack.name ~= "TACTICLE_NUKE_INCOMING") or player.cursor_stack.valid_for_read == false)
+	and storage.players[event.player_index]
+	and storage.players[event.player_index].NukeRangeBuff == true) then
+		player.character.character_build_distance_bonus = player.character.character_build_distance_bonus - 420
+		storage.players[event.player_index].NukeRangeBuff = false
 	end
 end)

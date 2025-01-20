@@ -1,3 +1,7 @@
+local sequence = {}
+for q = 1, 175 do
+	sequence[q] = q
+end
 data:extend({
 {------------intervention-------------
 	type = "gun",
@@ -180,13 +184,12 @@ data:extend({
 	energy_required = 4,
 	ingredients =
 		{
-			{type="item", name="headshot", amount=1},
-			{type="item", name="steel-plate", amount=3},
-			{type="item", name="explosives", amount=3}
+			{type="item", name="steel-plate", amount=9},
+			{type="item", name="explosives", amount=11}
 		},
-	results = 
+	results =
 		{
-			{type="item", name="headshot2", amount=2}
+			{type="item", name="headshot2", amount=5}
 		}
 },
 
@@ -197,20 +200,63 @@ data:extend({
 	subgroup = "explosions",
 	animations =
 	{
-	  filename = "__MLG_FactOreo__/graphics/smokeweedeveryday/hitmarker.png",
-	  width = 64,
-	  height = 64,
-	  line_length = 1,
-	  frame_count = 1,
-	  animation_speed = 0.1,
-	  scale = 0.5
+		filename = "__MLG_FactOreo__/graphics/smokeweedeveryday/hitmarker.png",
+		width = 64,
+		height = 64,
+		line_length = 1,
+		frame_count = 1,
+		animation_speed = 0.1,
+		scale = 0.5
 	},
 	light = {intensity = 1, size = 10, color = {r=1.0, g=1.0, b=1.0}},
 	smoke = "smoke-fast",
 	smoke_count = 1,
 	smoke_slow_down_factor = 1
+},
+
+
+
+{
+    type = "simple-entity",
+    name = "TACTICLE_NUKE",
+    icon = "__MLG_FactOreo__/graphics/smokeweedeveryday/NUKEICON.png",
+	icon_size = 33,
+    flags = {"placeable-neutral", "placeable-off-grid"},
+    max_health = 420,
+	collision_mask = {layers={}},
+    picture =
+	{
+		filename = "__MLG_FactOreo__/graphics/smokeweedeveryday/NUKEICON.png",
+		priority = "extra-high",
+		tint = {1, 1, 1, 0.5},
+		width = 33,
+		height = 33,
+		scale = 10
+    }
+},
+{
+    type = "item",
+    name = "TACTICLE_NUKE_INCOMING",
+    icon = "__MLG_FactOreo__/graphics/smokeweedeveryday/NUKEICON.png",
+	icon_size = 33,
+    place_result = "TACTICLE_NUKE",
+	stack_size = 1
+},
+{
+	type = "animation",
+	name = "TACTICLE_NUKE_INCOMING",
+	filename = "__MLG_FactOreo__/graphics/smokeweedeveryday/TACTICLENUKEINCOMING.png",
+	size = {202,139},
+	frame_count = 175,
+	line_length = 5,
+	animation_speed = 28/60,
+	scale=1,
+	animation_sequence = sequence
+},
+{
+	type = "sound",
+	name = "NUKE_INCOMING",
+	filename = "__MLG_FactOreo__/sickw0bs/TACTICLENUKE.ogg",
+	volume = 2
 }
 })
-table.insert(data.raw["technology"]["military"].effects,{type="unlock-recipe",recipe="awwman"})
-table.insert(data.raw["technology"]["military"].effects,{type="unlock-recipe",recipe="thegoods"})
-table.insert(data.raw["technology"]["military"].effects,{type="unlock-recipe",recipe="thegoods2"})
